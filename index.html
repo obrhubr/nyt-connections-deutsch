@@ -2,13 +2,29 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 	<style>
+		@font-face {
+			font-family: Karnak;
+			src: url(karnak-normal-400.woff2);
+			font-weight: 400;
+		}
+		@font-face {
+			font-family: Franklin;
+			src: url(franklin-normal-300.woff2);
+			font-weight: 300;
+		}
+		@font-face {
+			font-family: Franklin;
+			src: url(franklin-normal-700.woff2);
+			font-weight: 700;
+		}
+
 		html, body, .all {
 			width: 100%;
 			height: 100%;
 
 			margin: 0;
 
-			font-family: sans-serif;
+			font-family: Franklin, 'Arial Narrow', Arial, sans-serif;
 			font-size: 18px;
 		}
 
@@ -36,13 +52,16 @@
 			display: flex;
 			flex-wrap: nowrap;
 			flex-direction: row;
+
+			text-wrap: wrap;
+			text-align : center;
 		}
 
 		.tile {
 			background-color: #cecdcd;
 			color: black;
    			text-transform: uppercase;
-			font-weight: 600;
+			font-weight: 700;
 
 			width: 100%;
 			height: 100%;
@@ -61,7 +80,7 @@
 			text-align-last: center;
 
 			cursor: pointer;
-			
+
 			word-break: break-all;
 		}
 
@@ -79,6 +98,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			
+			font-weight: 300;
 		}
 
 		.button {
@@ -144,6 +165,7 @@
 			justify-content: center;
 
 			font-size: 15px;
+			font-weight: 300;
 		}
 
 		.mistakes {
@@ -298,24 +320,29 @@
 			width: 100%;
 			padding-top: 20px;
 			padding-bottom: 20px;
+			padding-left: 20px;
 
 			margin-bottom: 3vw;
 
 			background-color: #ededed;
-
-			display: flex;
-			flex-direction: row;
 		}
 
-		.title div {
-			margin-left: 10px;
-			margin-right: 10px;
-
-			text-align: center;
-		}
 		.name {
 			font-size: 25px;
-			font-weight: bolder;
+			font-weight: 700;
+			font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
+		}
+
+		.date {
+			margin-left: 10px;
+			font-weight: 400;
+			font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
+		}
+
+		.number {
+			margin-left: 10px;
+			font-weight: 400;
+			font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
 		}
 	</style>
 
@@ -604,7 +631,7 @@
 			} else {
 				// Check difference, if only one show "one away"
 				if (answerOneAway.length > 0) {
-					showWarning("One Away!");
+					showWarning("Nur ein Fehler!");
 				}
 
 				mistakes++;
@@ -741,9 +768,9 @@
 <body onload="metadataSetup();getWords();shuffleWords();setupMistakes();">
 	<div id="all">
 		<div class="title">
-			<div class="name-container"><div class="name">Verbindungen</div></div>
-			<div class="date-container"><div class="date" id="date"></div></div>
-			<div class="number-container"><div class="number" id="number"></div></div>
+			<span class="name">Verbindungen</span>
+			<span class="date" id="date"></span>
+			<span class="number" id="number"></span>
 		</div>
 
 		<div class="grid">
@@ -773,25 +800,23 @@
 			</div>
 		</div>
 		<div class="mistake-counter" id="mistake-container">
-			<div>Mistakes remaining: </div>
-			<div class="mistakes" id="mistakes">
-				
-			</div>
+			<div>Verbleibende Versuche: </div>
+			<div class="mistakes" id="mistakes"></div>
 		</div>
 		<div class="buttons" id="buttons">
-			<div class="submit button" id="submit">Submit</div>
-			<div class="shuffle button" id="shuffle" onclick="shuffleWords();">Shuffle</div>
+			<div class="submit button" id="submit">Probieren</div>
+			<div class="shuffle button" id="shuffle" onclick="shuffleWords();">Mischen</div>
 		</div>
 	</div>
 
 	<div id="results" class="results popup">
 		<div>
-			<h2>Your Results</h2>
+			<h2>Dein Ergebnis</h2>
 		</div>
 		<div id="steps" class="steps">
 			
 		</div>
-		<div class="copy button" id="copy" onclick="copyResults()">Share Results!</div>
+		<div class="copy button" id="copy" onclick="copyResults()">Teile dein Ergebnis!</div>
 	</div>
 
 	<div id="warning" class="warning popup">
