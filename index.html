@@ -437,27 +437,33 @@
 				"solved": false,
 				"color": "rgb(160, 195, 90)",
 				"category": "Käsesorten", 
-				"words": ["Gouda", "Brie", "Feta", "Emmentaler"]
+				"words": ["Gouda", "Brie", "feta", "emmentaler"]
 			},
 			"medium": {
 				"solved": false,
 				"color": "rgb(249, 223, 109)",
 				"category": "Füllwörter",
-				"words": ["Ehm", "So", "Also", "Halt"]
+				"words": ["ehm", "so", "also", "halt"]
 			},
 			"hard": {
 				"solved": false,
 				"color": "rgb(176, 196, 239)",
 				"category": "Sonnen___", 
-				"words": ["blume", "untergang", "schirm", "brand"]
+				"words": ["Blume", "untergang", "schirm", "brand"]
 			},
 			"tricky": {
 				"solved": false,
 				"color": "rgb(186, 129, 197)",
 				"category": "Charaktere aus Goethe", 
-				"words": ["Werther", "Mephisto", "Prometheus", "Heinrich"]
+				"words": ["werther", "mephisto", "prometheus", "heinrich"]
 			},
 		};
+		// Lowercase all the words
+		Object.entries(categories).map(([k, v]) => {
+			categories[k].words = v.words.map((x) => x.toLowerCase());
+		});
+
+
 		let mistakes = 0;
 		let words = [];
 		let tries = [];
