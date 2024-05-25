@@ -15,14 +15,13 @@
 	font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
 }
 
-.date {
+.number {
 	margin-left: 10px;
 	font-weight: 400;
 	font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
 }
 
-.number {
-	margin-left: 10px;
-	font-weight: 400;
-	font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
+.navigate {
+	margin-left: 10%;
+	cursor: pointer;
 }

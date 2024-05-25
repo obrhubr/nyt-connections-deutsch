@@ -1,3 +1,8 @@
+// Current game data
+let categories = {};
+let puzzleNumber = 0;
+
+// Stat trackers
 let mistakes = 0;
 let words = [];
 let tries = [];
@@ -8,11 +13,9 @@ Object.entries(categories).map(([k, v]) => {
 	categories[k].words = v.words.map((x) => x.toLowerCase());
 });
 
-function metadataSetup() {
+function metadataSetup(puzzleNumber) {
 	let number = document.getElementById("number");
-	number.innerHTML = "#" + metadata.number;
-	let date = document.getElementById("date");
-	date.innerHTML = metadata.date;
+	number.innerHTML = "#" + puzzleNumber;
 }
 
 function setup() {
@@ -82,8 +85,25 @@ function setupMistakes() {
 }
 
 function init() {
-	metadataSetup();
-	getWords();
-	shuffleWords();
-	setupMistakes();
+	// Get puzzle number
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+
+	// load data
+	fetch('data.json')
+    .then(response => {
+        return response.json(); // Parse the JSON data
+    })
+    .then(data => {
+		puzzleNumber = urlParams.has('number') ? Number(urlParams.get('number')) : data.length - 1;
+
+		// Load data into variables
+		categories = data[puzzleNumber].categories;
+
+		// run DOM setup
+		metadataSetup(puzzleNumber);
+		getWords();
+		shuffleWords();
+		setupMistakes();
+    });
 }
