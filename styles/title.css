@@ -1,0 +1,28 @@
+.title {
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+
+	margin-bottom: 3vw;
+
+	background-color: #ededed;
+}
+
+.name {
+	font-size: 25px;
+	font-weight: 700;
+	font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
+}
+
+.date {
+	margin-left: 10px;
+	font-weight: 400;
+	font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
+}
+
+.number {
+	margin-left: 10px;
+	font-weight: 400;
+	font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
+}
