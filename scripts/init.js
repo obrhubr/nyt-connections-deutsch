@@ -90,20 +90,19 @@ function init() {
 	const urlParams = new URLSearchParams(queryString);
 
 	// load data
-	fetch('data.json')
-    .then(response => {
-        return response.json(); // Parse the JSON data
-    })
-    .then(data => {
-		puzzleNumber = urlParams.has('number') ? Number(urlParams.get('number')) : data.length - 1;
+	db.collection("verbindungen").get().then((querySnapshot) => {
+		querySnapshot.forEach((doc) => {
+			let data = doc.data().puzzles;
+			puzzleNumber = urlParams.has('number') ? Number(urlParams.get('number')) : data.length - 1;
 
-		// Load data into variables
-		categories = data[puzzleNumber].categories;
+			// Load data into variables
+			categories = data[puzzleNumber];
 
-		// run DOM setup
-		metadataSetup(puzzleNumber);
-		getWords();
-		shuffleWords();
-		setupMistakes();
-    });
+			// run DOM setup
+			metadataSetup(puzzleNumber);
+			getWords();
+			shuffleWords();
+			setupMistakes();
+		});
+	});
 }
