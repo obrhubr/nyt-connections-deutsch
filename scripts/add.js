@@ -27,6 +27,9 @@ function send() {
 	if (!button.classList.contains("active")) {
 		return;
 	};
+	if (firebase.auth().currentUser == null) {
+		return;
+	};
 
 	db.collection("verbindungen").add({
 		"timestamp": Date.now(),
