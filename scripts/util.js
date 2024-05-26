@@ -134,7 +134,7 @@ function shuffleWords() {
 
 function copyResults() {
 	let history = convertHistory();
-	let text = "Verbindungen Puzzle #" + metadata.number + "\n";
+	let text = "Verbindungen Puzzle: " + puzzleNumber + "\n";
 	for (let h = 0; h < history.length; h++) {
 		for (let el = 0; el < history[h].length; el++) {
 			if (history[h][el] == "straightforward") {
@@ -147,8 +147,9 @@ function copyResults() {
 				text += "🟪"
 			};
 		}
-		text += "\n";
+		text += "\n"
 	};
+	text += window.location.hostname + "/?number=" + puzzleNumber;
 
 	copyTextToClipboard(text);
 }

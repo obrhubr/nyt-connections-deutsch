@@ -102,7 +102,6 @@ function showResults() {
 	let steps = document.getElementById("steps");
 	steps.innerHTML = "";
 	for (let h = 0; h < history.length; h++) {
-		console.log(h, history[h], history[h][0], history[h][1], history[h][2], history[h][3])
 		let row = document.createElement("div");
 		row.classList.add("steps-row");
 		row.innerHTML = 
