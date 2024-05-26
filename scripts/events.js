@@ -61,6 +61,11 @@ async function submitCategory() {
 		console.log("Solved category", answer[0])
 		categories[answer[0]].solved = true;
 		setup();
+
+		analytics.logEvent('solved', {
+			id: puzzleNumber,
+			category: answer[0]
+		});
 	} else {
 		// Check difference, if only one show "one away"
 		if (answerOneAway.length > 0) {
@@ -69,6 +74,10 @@ async function submitCategory() {
 
 		mistakes++;
 		setupMistakes();
+
+		analytics.logEvent('mistake', {
+			id: puzzleNumber
+		});
 
 		// show animation
 		let s = document.getElementsByClassName("selected");
@@ -121,6 +130,12 @@ function showResults() {
 }
 
 function gameEnd(success) {
+	analytics.logEvent('end', {
+		id: puzzleNumber,
+		success: success,
+		mistakes: mistakes
+	});
+
 	let mistakesContainer = document.getElementById("mistake-container");
 	mistakesContainer.innerHTML = "";
 	let buttons = document.getElementById("buttons");
