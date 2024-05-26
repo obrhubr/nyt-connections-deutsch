@@ -49,7 +49,7 @@ async function submitCategory() {
 		if (selected.equals(categories[cNames[c]].words)) {
 			answers.push(cNames[c]);
 		} else if (areOneAway(categories[cNames[c]].words, selected)) {
-			answers.push(oneaway);
+			answers.push("oneaway");
 		};
 	};
 	
