@@ -2,9 +2,8 @@
 
 Try it out at [verbindungen-game.web.app](verbindungen-game.web.app).
 
-This site is a clone of the popular puzzle published by the New York Times, [Connections](https://www.nytimes.com/games/connections).
+This site is a clone of the popular puzzle published by the New York Times, [Connections](https://www.nytimes.com/games/connections). The objective of the game is to sort 16 words into four different categories.
 The goal was to recreate the game as simply as possible, in pure html, css and javascript (without the help of a framework). This allowed me to build it in about 24h.
-The objective of the game is to sort 16 words into four different categories.
 
 ## Hosting the site
 
@@ -40,9 +39,20 @@ verbindungen-game.web.app/?number=K161sMaSf8UE60hcTh45
 
 ## Creating new Puzzles
 
+A second page under `/add` allows the user to sign in with credentials, powered by the Firebase authentification service. Only certain users are allowed to upload puzzles, restricting the access.
+
+Once the correct username and password have been provided the user can fill out category names and the corresponding words and upload the puzzle at the end.
+
 | The puzzle creation screen | A few words filled in |
 :-------------------------:|:-------------------------:
 ![Puzzle creation page](.github/creation.png) | ![Partially filled out puzzle](.github/partial.png) |
 
 
 ## Analytics
+
+Firebase allows us to send custom events, that track the users progress with the puzzle.
+We identify the user with a specific UUID at the beginning of the session.
+
+When the user makes a mistake or category an event with the puzzle id and user id is sent. At the end of the game a summary with the mistakes and puzzle id is sent to the server.
+
+This allows us to track which categories are harder or are solved first for example.
