@@ -5,7 +5,7 @@
 				"solved": false,
 				"color": "rgb(160, 195, 90)",
 				"category": "Dinge die man in einem Chemielabor findet", 
-				"words": ["Labor", "Kittel", "Pipette", "Waage"]
+				"words": ["Binden", "Kittel", "Pipette", "Waage"]
 			},
 			"medium": {
 				"solved": false,
@@ -17,35 +17,7 @@
 				"solved": false,
 				"color": "rgb(176, 196, 239)",
 				"category": "Begriffe aus der Schiffsfahrt",
-				"words": ["Löschen", "Bereiten", "Stak", "Fracht"]
-			},
-			"tricky": {
-				"solved": false,
-				"color": "rgb(186, 129, 197)",
-				"category": "Erste Wörter in James Bond Filmtiteln", 
-				"words": ["Gold", "Liebesgrüße", "Lizenz", "Casino"]
-			}
-		}
-	},
-	{
-		"categories": {
-			"straightforward": {
-				"solved": false,
-				"color": "rgb(160, 195, 90)",
-				"category": "Dinge die man in einem Chemielabor findet", 
-				"words": ["asdf", "Kiasdffttel", "sfdf", "sdfsdf"]
-			},
-			"medium": {
-				"solved": false,
-				"color": "rgb(249, 223, 109)",
-				"category": "___käse",
-				"words": ["sdf", "sdf", "sdf", "sdf"]
-			},
-			"hard": {
-				"solved": false,
-				"color": "rgb(176, 196, 239)",
-				"category": "Begriffe aus der Schiffsfahrt",
-				"words": ["sdf", "Bereiten", "Stak", "Fracht"]
+				"words": ["Löschen", "Bereiten", "Stak", "Knoten"]
 			},
 			"tricky": {
 				"solved": false,
