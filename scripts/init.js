@@ -1,6 +1,7 @@
 // Current game data
 let categories = {};
-let puzzleNumber = 0;
+let cNames = ["straightforward", "medium", "hard", "tricky"];
+let puzzleNumber = "";
 
 // Stat trackers
 let mistakes = 0;
@@ -8,20 +9,16 @@ let words = [];
 let tries = [];
 let selected = [];
 
-// Lowercase all the words
-Object.entries(categories).map(([k, v]) => {
-	categories[k].words = v.words.map((x) => x.toLowerCase());
-});
-
 function metadataSetup(puzzleNumber) {
 	let number = document.getElementById("number");
 	number.innerHTML = "#" + puzzleNumber;
+	let date = document.getElementById("date");
+	date.innerHTML = new Date(categories.timestamp).toLocaleString('de-DE', {year: 'numeric', month: '2-digit', day:'2-digit'});
 }
 
 function setup() {
 	// Get solved categories
 	let solveds = [];
-	let cNames = ["straightforward", "medium", "hard", "tricky"];
 	for (let c = 0; c < cNames.length; c++) {
 		if (categories[cNames[c]].solved) {
 			solveds.push(cNames[c]);
@@ -86,6 +83,19 @@ function setupMistakes() {
 	}
 }
 
+function runSetup() {
+	// Lowercase all the words
+	for (let c = 0; c < cNames.length; c++) {
+		categories[cNames[c]].words = categories[cNames[c]].words.map((x) => x.toLowerCase());
+	}
+	
+	// run DOM setup
+	metadataSetup(puzzleNumber);
+	getWords();
+	shuffleWords();
+	setupMistakes();
+}
+
 function init() {
 	// Get puzzle number
 	const queryString = window.location.search;
@@ -93,21 +103,37 @@ function init() {
 
 	if (hosted) {
 		// load data
-		db.collection("verbindungen").get().then((querySnapshot) => {
-			querySnapshot.forEach((doc) => {
-				let data = doc.data().puzzles;
-				puzzleNumber = urlParams.has('number') ? Number(urlParams.get('number')) : data.length - 1;
+		puzzleNumber = urlParams.has('number') ? urlParams.get('number') : "";
+
+		if (puzzleNumber == "") {
+			db.collection("verbindungen").orderBy("timestamp", "desc").limit(1).get()
+			.then((querySnapshot) => {
+				querySnapshot.forEach((doc) => {
+					let data = doc.data();
+					puzzleNumber = doc.id;
 	
-				// Load data into variables
-				categories = data[puzzleNumber];
-	
-				// run DOM setup
-				metadataSetup(puzzleNumber);
-				getWords();
-				shuffleWords();
-				setupMistakes();
+					// Load data into variables
+					categories = data;
+
+					runSetup();
+				});
 			});
-		});
+		} else {
+			db.collection("verbindungen").doc(puzzleNumber).get()
+			.then((doc) => {
+				if (doc.exists) {
+					let data = doc.data();
+					puzzleNumber = doc.id;
+	
+					// Load data into variables
+					categories = data;
+				} else {
+					window.location.replace("/");
+				};
+
+				runSetup();
+			});
+		}
 	} else {
 		puzzleNumber = 0;
 		categories = {
@@ -136,11 +162,7 @@ function init() {
 				"words": ["Gold", "Liebesgrüße", "Lizenz", "Casino"]
 			}
 		};
-	
-		// run DOM setup
-		metadataSetup(puzzleNumber);
-		getWords();
-		shuffleWords();
-		setupMistakes();
+
+		runSetup();
 	}
 }

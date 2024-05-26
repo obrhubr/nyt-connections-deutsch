@@ -103,14 +103,13 @@ function convertHistory() {
 
 	for (let i = 0; i < tries.length; i++) {
 		history.push([]);
-		for (let w = 0; w < tries[i].length; w++) {
-			for (let category in categories) {
-				// Check if the word exists in the current category
-				if (categories[category].words.includes(tries[i][w].toLowerCase())) {
+		for (let w = 0; w < tries[i].length; w++) {		
+			for (let c = 0; c < cNames.length; c++) {
+				if (categories[cNames[c]].words.includes(tries[i][w].toLowerCase())) {
 					// If the word is found in the category, return the category name
-					history[i].push(category);
+					history[i].push(cNames[c]);
 				}
-			}
+			};
 		}
 	}
 
@@ -120,12 +119,11 @@ function convertHistory() {
 function getWords() {
 	// Add only unsolved words to list
 	words = [];
-	Object.entries(categories).map(([k, v]) => {
-		if (!v.solved) {
-			words.push(...v.words);
-		}
-		return;
-	});
+	for (let c = 0; c < cNames.length; c++) {
+		if (!categories[cNames[c]].solved) {
+			words.push(...categories[cNames[c]].words);
+		};
+	};
 }
 
 function shuffleWords() {

@@ -43,15 +43,16 @@ async function submitCategory() {
 	
 	selected.sort();
 
-	let answers = Object.entries(categories).map(([k, v]) => {
-		v.words.sort();
-		if (selected.equals(v.words)) {
-			return k;
-		} else if (areOneAway(v.words, selected)) {
-			return "oneaway";
-		}
-		return ;
-	});
+	let answers = [];
+	for (let c = 0; c < cNames.length; c++) {
+		categories[cNames[c]].words.sort();
+		if (selected.equals(categories[cNames[c]].words)) {
+			answers.push(cNames[c]);
+		} else if (areOneAway(categories[cNames[c]].words, selected)) {
+			answers.push(oneaway);
+		};
+	};
+	
 	// Remove undefined
 	answerOneAway = answers.filter(item => item);
 	answer = answerOneAway.filter(item => item !== "oneaway");
@@ -127,10 +128,10 @@ function gameEnd(success) {
 	buttons.innerHTML = '<div onclick="showResults()" class="showresults button" id="showresults">Show Results</div>';
 
 	if (success) {
-	} else {
-		Object.entries(categories).map(([k, v]) => {
-			v.solved = true;
-		});
+	} else {	
+		for (let c = 0; c < cNames.length; c++) {
+			categories[cNames[c]].solved = true;
+		};
 		setup()
 	}
 };

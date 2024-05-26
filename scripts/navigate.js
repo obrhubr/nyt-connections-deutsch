@@ -1,25 +1,53 @@
 function backwards() {
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
+	// Get next document
+	db.collection("verbindungen").where("timestamp", "<", categories.timestamp)
+	.orderBy("timestamp")
+	.limit(1)
+	.get()
+	.then((querySnapshot) => {
+		querySnapshot.forEach((doc) => {
+			if (!doc.exists) return;
 
-	// Change number
-	urlParams.set('number', Number(urlParams.get('number')) > 0 ? Number(urlParams.get('number')) - 1 : 0)
-
-	const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
-
-	// Reload the page with the new URL
-	window.location.href = newUrl;
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+		
+			// Change number
+			urlParams.set('number', doc.id)
+		
+			const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+		
+			// Reload the page with the new URL
+			window.location.href = newUrl;
+		});
+	})
+	.catch((error) => {
+		alert("Error getting puzzle");
+	});
 }
 
 function forwards() {
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-
-	// Change number
-	urlParams.set('number', Number(urlParams.get('number')) + 1)
-
-	const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
-
-	// Reload the page with the new URL
-	window.location.href = newUrl;
+	// Get next document
+	db.collection("verbindungen").where("timestamp", ">", categories.timestamp)
+	.orderBy("timestamp")
+	.limit(1)
+	.get()
+	.then((querySnapshot) => {
+		querySnapshot.forEach((doc) => {
+			if (!doc.exists) return;
+			
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+		
+			// Change number
+			urlParams.set('number', doc.id)
+		
+			const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+		
+			// Reload the page with the new URL
+			window.location.href = newUrl;
+		});
+	})
+	.catch((error) => {
+		alert("Error getting puzzle");
+	});
 }
