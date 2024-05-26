@@ -1,4 +1,8 @@
-// Initialize Firestore through Firebase
-firebase.initializeApp(keys);
+let hosted = false;
 
-var db = firebase.firestore();
+if (hosted) {
+	// Initialize Firestore through Firebase
+	firebase.initializeApp(keys);
+	
+	var db = firebase.firestore();
+}

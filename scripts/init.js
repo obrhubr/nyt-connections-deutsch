@@ -20,12 +20,14 @@ function metadataSetup(puzzleNumber) {
 
 function setup() {
 	// Get solved categories
-	let solveds = Object.entries(categories).map(([k, v]) => {
-		if (v.solved) {
-			return k
-		}
-		return;
-	});
+	let solveds = [];
+	let cNames = ["straightforward", "medium", "hard", "tricky"];
+	for (let c = 0; c < cNames.length; c++) {
+		if (categories[cNames[c]].solved) {
+			solveds.push(cNames[c]);
+		};
+	}
+	
 	// Remove undefined
 	solveds = solveds.filter(item => item);
 
@@ -89,20 +91,56 @@ function init() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 
-	// load data
-	db.collection("verbindungen").get().then((querySnapshot) => {
-		querySnapshot.forEach((doc) => {
-			let data = doc.data().puzzles;
-			puzzleNumber = urlParams.has('number') ? Number(urlParams.get('number')) : data.length - 1;
-
-			// Load data into variables
-			categories = data[puzzleNumber];
-
-			// run DOM setup
-			metadataSetup(puzzleNumber);
-			getWords();
-			shuffleWords();
-			setupMistakes();
+	if (hosted) {
+		// load data
+		db.collection("verbindungen").get().then((querySnapshot) => {
+			querySnapshot.forEach((doc) => {
+				let data = doc.data().puzzles;
+				puzzleNumber = urlParams.has('number') ? Number(urlParams.get('number')) : data.length - 1;
+	
+				// Load data into variables
+				categories = data[puzzleNumber];
+	
+				// run DOM setup
+				metadataSetup(puzzleNumber);
+				getWords();
+				shuffleWords();
+				setupMistakes();
+			});
 		});
-	});
+	} else {
+		puzzleNumber = 0;
+		categories = {
+			"straightforward": {
+				"solved": false,
+				"color": "rgb(249, 223, 109)",
+				"category": "Dinge die man in einem Chemielabor findet", 
+				"words": ["Binden", "Kittel", "Pipette", "Waage"]
+			},
+			"medium": {
+				"solved": false,
+				"color": "rgb(160, 195, 90)",
+				"category": "___käse",
+				"words": ["Frisch", "Hart", "Schnitt", "Reib"]
+			},
+			"hard": {
+				"solved": false,
+				"color": "rgb(176, 196, 239)",
+				"category": "Begriffe aus der Schiffsfahrt",
+				"words": ["Löschen", "Bereiten", "Stak", "Knoten"]
+			},
+			"tricky": {
+				"solved": false,
+				"color": "rgb(186, 129, 197)",
+				"category": "Erste Wörter in James Bond Filmtiteln", 
+				"words": ["Gold", "Liebesgrüße", "Lizenz", "Casino"]
+			}
+		};
+	
+		// run DOM setup
+		metadataSetup(puzzleNumber);
+		getWords();
+		shuffleWords();
+		setupMistakes();
+	}
 }
