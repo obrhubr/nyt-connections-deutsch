@@ -84,9 +84,9 @@ function setupMistakes() {
 }
 
 function runSetup() {
-	// Lowercase all the words
+	// Uppercase then lowercase all words to remove special characters
 	for (let c = 0; c < cNames.length; c++) {
-		categories[cNames[c]].words = categories[cNames[c]].words.map((x) => x.toLowerCase());
+		categories[cNames[c]].words = categories[cNames[c]].words.map((x) => x.toUpperCase().toLowerCase());
 	}
 	
 	// run DOM setup
