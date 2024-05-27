@@ -109,13 +109,10 @@ function init() {
 			db.collection("verbindungen").orderBy("timestamp", "desc").limit(1).get()
 			.then((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
-					let data = doc.data();
 					puzzleNumber = doc.id;
 	
-					// Load data into variables
-					categories = data;
-
-					runSetup();
+					// Reload page with correct number:
+					window.location.replace("/?number=" + puzzleNumber);
 				});
 			});
 		} else {
