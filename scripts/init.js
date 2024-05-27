@@ -17,16 +17,7 @@ function metadataSetup(puzzleNumber) {
 }
 
 function setup() {
-	// Get solved categories
-	let solveds = [];
-	for (let c = 0; c < cNames.length; c++) {
-		if (categories[cNames[c]].solved) {
-			solveds.push(cNames[c]);
-		};
-	}
-	
-	// Remove undefined
-	solveds = solveds.filter(item => item);
+	let solveds = getSolved();
 
 	for (let s = 0; s < solveds.length; s++) {
 		for (let w = 0; w < categories[solveds[s]].words.length; w++) {
@@ -60,10 +51,6 @@ function setup() {
 		tile.classList.remove("selected");
 		tile.innerText = words[idx - 1];
 	};
-
-	if (solveds.length == 4) {
-		gameEnd(true);
-	}
 }
 
 function setupMistakes() {	

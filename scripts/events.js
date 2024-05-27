@@ -62,10 +62,6 @@ async function submitCategory() {
 		categories[answer[0]].solved = true;
 		setup();
 
-		analytics.logEvent('solved', {
-			id: puzzleNumber,
-			category: answer[0]
-		});
 	} else {
 		// Check difference, if only one show "one away"
 		if (answerOneAway.length > 0) {
@@ -74,10 +70,6 @@ async function submitCategory() {
 
 		mistakes++;
 		setupMistakes();
-
-		analytics.logEvent('mistake', {
-			id: puzzleNumber
-		});
 
 		// show animation
 		let s = document.getElementsByClassName("selected");
@@ -88,6 +80,11 @@ async function submitCategory() {
 		for (let i = 0; i < s.length; i++) {
 			s[i].classList.remove("horizontal-shake")
 		}
+	}
+
+	let solveds = getSolved();
+	if (solveds.length == 4) {
+		gameEnd(true);
 	}
 	
 	// Activate submit again
@@ -130,11 +127,21 @@ function showResults() {
 }
 
 function gameEnd(success) {
-	analytics.logEvent('end', {
+	// convert history to dictionary for firebase
+	let history_dict = {}
+	tries.forEach((el, index) => history_dict[index] = el);
+
+	let stats = {
+		userId: userId,
+		timestamp: Date.now(),
 		id: puzzleNumber,
 		success: success,
-		mistakes: mistakes
-	});
+		mistakes: mistakes,
+		history: history_dict
+	};
+
+	analytics.logEvent('end', stats);
+	db.collection("log").add(stats);
 
 	let mistakesContainer = document.getElementById("mistake-container");
 	mistakesContainer.innerHTML = "";
@@ -142,7 +149,7 @@ function gameEnd(success) {
 	buttons.innerHTML = '<div onclick="showResults()" class="showresults button" id="showresults">Show Results</div>';
 
 	if (success) {
-	} else {	
+	} else {
 		for (let c = 0; c < cNames.length; c++) {
 			categories[cNames[c]].solved = true;
 		};

@@ -153,3 +153,17 @@ function copyResults() {
 
 	copyTextToClipboard(text);
 }
+
+function getSolved() {
+	let solveds = [];
+	for (let c = 0; c < cNames.length; c++) {
+		if (categories[cNames[c]].solved) {
+			solveds.push(cNames[c]);
+		};
+	}
+	
+	// Remove undefined
+	solveds = solveds.filter(item => item);
+
+	return solveds;
+}

@@ -4,7 +4,8 @@ if (hosted) {
 	// Initialize Firestore through Firebase
 	const app = firebase.initializeApp(keys);
 	var analytics = firebase.analytics(app);
-	analytics.setUserId(crypto.randomUUID());
+	var userId = crypto.randomUUID();
+	analytics.setUserId(userId);
 	
 	var db = firebase.firestore();
 }

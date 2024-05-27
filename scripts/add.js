@@ -34,6 +34,7 @@ function send() {
 	let timestamp = Date.now();
 	db.collection("verbindungen").add({
 		"timestamp": timestamp,
+		"author": document.getElementById("author").value,
 		"straightforward": {
 			"solved": false,
 			"color": "rgb(249, 223, 109)",
@@ -81,10 +82,6 @@ function send() {
 	})
 	.then((docRef) => {
 		alert("Successfully added puzzle");
-		analytics.logEvent('added_puzzle', {
-			timestamp: timestamp,
-			id: docRef.id
-		})
 		
 		window.location.replace("/");
 	})
