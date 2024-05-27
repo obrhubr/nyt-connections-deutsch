@@ -12,6 +12,8 @@ let selected = [];
 function metadataSetup(puzzleNumber) {
 	let number = document.getElementById("number");
 	number.innerHTML = "#" + puzzleNumber;
+	let author = document.getElementById("author");
+	author.innerHTML = "by " + categories.author;
 	let date = document.getElementById("date");
 	date.innerHTML = new Date(categories.timestamp).toLocaleString('de-DE', {year: 'numeric', month: '2-digit', day:'2-digit'});
 }
