@@ -55,13 +55,18 @@ async function submitCategory() {
 	
 	// Remove undefined
 	answerOneAway = answers.filter(item => item);
-	answer = answerOneAway.filter(item => item !== "oneaway");
+	let answer = answerOneAway.filter(item => item !== "oneaway");
 	
 	if (answer.length == 1) {
 		console.log("Solved category", answer[0])
 		categories[answer[0]].solved = true;
-		setup();
 
+		let solveds = getSolved();
+		if (solveds.length == 4) {
+			gameEnd(true);
+		}
+
+		setup();
 	} else {
 		// Check difference, if only one show "one away"
 		if (answerOneAway.length > 0) {
@@ -80,11 +85,6 @@ async function submitCategory() {
 		for (let i = 0; i < s.length; i++) {
 			s[i].classList.remove("horizontal-shake")
 		}
-	}
-
-	let solveds = getSolved();
-	if (solveds.length == 4) {
-		gameEnd(true);
 	}
 	
 	// Activate submit again
