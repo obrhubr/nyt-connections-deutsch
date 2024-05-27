@@ -8,15 +8,14 @@ function showLoginAlert() {
 			firebase.auth().signInWithEmailAndPassword(email, password)
 			.then((userCredential) => {
 				let user = userCredential.user;
+				window.location.reload();
 			})
 			.catch((error) => {
 				alert("Error signing in.");
 				document.getElementById("signedin").innerHTML = "WARNING: Not signed in!"
 			});
 	} else {
+		document.getElementById("signedin").innerHTML = "WARNING: Not signed in!"
 		console.error("Email or password is empty.");
 	}
 }
-
-// Call the function to show the alert
-showLoginAlert();

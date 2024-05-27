@@ -21,12 +21,19 @@
 <body onload="init();">
 	<div id="all">
 		<div class="title">
-			<span class="name">Verbindungen</span>
-			<span class="date" id="date"></span>
-			<span class="number" id="number"></span>
-
-			<span onclick="backwards()" class="navigate" id="backwards">⬅️</span>
-			<span onclick="forwards()" class="navigate" id="forwards">➡️</span>
+			<div class="title-bar">
+				<div>
+					<span class="name"><a href="/">Verbindungen</a></span>
+					<span class="date" id="date"></span>
+					<span class="number" id="number"></span>
+				</div>
+	
+				<div class="navigate-container">
+					<span onclick="backwards()" class="navigate" id="backwards">⬅️</span>
+					<span class="navigate" id="overview"><a href="/overview.html">Alle Puzzle</a></span>
+					<span onclick="forwards()" class="navigate" id="forwards">➡️</span>
+				</div>
+			</div>
 		</div>
 
 		<div class="grid">

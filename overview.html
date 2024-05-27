@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" href="styles/animations.css">
+	<link rel="stylesheet" href="styles/buttons.css">
+	<link rel="stylesheet" href="styles/fonts.css">
+	<link rel="stylesheet" href="styles/general-layout.css">
+	<link rel="stylesheet" href="styles/grid.css">
+	<link rel="stylesheet" href="styles/mistakes.css">
+	<link rel="stylesheet" href="styles/popups.css">
+	<link rel="stylesheet" href="styles/results.css">
+	<link rel="stylesheet" href="styles/title.css">
+	<link rel="stylesheet" href="styles/list.css">
+
+	<title>Verbindungen: Puzzle verwalten</title>
+	<link rel="icon" type="image/x-icon" href="https://www.nytimes.com/games-assets/v2/assets/icons/connections.svg">
+
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
+<body onload="init();">
+	<div id="all">
+		<div class="title">
+			<span class="name"><a href="/">Verbindungen</a></span>
+			<button onclick="showLoginAlert();" class="button">Login</button>
+			<span class="navigate"><a href="/add.html">Add Puzzle</a></span>
+		</div>
+
+		<div id="list" class="list">
+
+		</div>
+	</div>
+	
+	<script src="scripts/db.js"></script>
+	<script src="scripts/auth.js"></script>
+	<script src="scripts/list.js"></script>
+</body>
