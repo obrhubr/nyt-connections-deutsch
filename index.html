@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="styles/popups.css">
 	<link rel="stylesheet" href="styles/results.css">
 	<link rel="stylesheet" href="styles/title.css">
+	<link rel="stylesheet" href="styles/stats.css">
 
 	<title>Verbindungen: Das Spiel</title>
 	<link rel="icon" type="image/x-icon" href="https://www.nytimes.com/games-assets/v2/assets/icons/connections.svg">
@@ -72,6 +73,11 @@
 			<div class="shuffle button" id="shuffle" onclick="shuffleWords();">Mischen</div>
 			<div class="submit button" id="submit">Probieren</div>
 		</div>
+		<div class="stats" id="stats">
+			<div id="avg"></div>
+			<div id="success"></div>
+			<div id="attempts"></div>
+		</div>
 	</div>
 
 	<div id="results" class="results popup">
@@ -92,4 +98,5 @@
 	<script src="scripts/navigate.js"></script>
 	<script src="scripts/util.js"></script>
 	<script src="scripts/init.js"></script>
+	<script src="scripts/stats.js"></script>
 </body>

@@ -1,0 +1,22 @@
+.stats {
+	margin-top: 3vw;
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 15px;
+	font-weight: 300;
+	color: gray;
+}
+
+.stats div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	margin-left: 10px;
+	margin-right: 10px;
+}

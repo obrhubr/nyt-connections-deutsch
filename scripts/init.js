@@ -9,13 +9,25 @@ let words = [];
 let tries = [];
 let selected = [];
 
-function metadataSetup(puzzleNumber) {
+async function metadataSetup(puzzleNumber) {
 	let number = document.getElementById("number");
 	number.innerHTML = "#" + puzzleNumber;
 	let author = document.getElementById("author");
 	author.innerHTML = "by " + categories.author;
 	let date = document.getElementById("date");
 	date.innerHTML = new Date(categories.timestamp).toLocaleString('de-DE', {year: 'numeric', month: '2-digit', day:'2-digit'});
+
+	// get statistics
+	let statistics = await getPuzzleStats(puzzleNumber);
+
+	let avg = document.getElementById("avg");
+	avg.innerHTML = "Durschnitt: " + statistics.avgMistakes + " Versuche";
+	
+	let success = document.getElementById("success");
+	success.innerHTML = statistics.successesPercent + "% gelöst";
+	
+	let attempts = document.getElementById("attempts");
+	attempts.innerHTML = statistics.attempts + " mal gespielt";
 }
 
 function setup() {
