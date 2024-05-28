@@ -1,7 +1,7 @@
 function backwards() {
 	// Get next document
 	db.collection("verbindungen").where("timestamp", "<", categories.timestamp)
-	.orderBy("timestamp")
+	.orderBy("timestamp", "desc")
 	.limit(1)
 	.get()
 	.then((querySnapshot) => {
