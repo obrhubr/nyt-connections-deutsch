@@ -25,7 +25,7 @@ function getPuzzleStats(id) {
 		};
 	
 		return {
-			"avgMistakes": mistakes.reduce((partialSum, a) => partialSum + a, 0) / mistakes.length,
+			"avgMistakes": (mistakes.reduce((partialSum, a) => partialSum + a, 0) / mistakes.length).toFixed(1),
 			"successesPercent": (successes.length / mistakes.length * 100).toFixed(1),
 			"attempts": mistakes.length
 		};
