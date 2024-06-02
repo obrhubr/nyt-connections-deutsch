@@ -1,6 +1,6 @@
 # NYT Connections in German
 
-Try it out at [verbindungen-game.web.app](verbindungen-game.web.app).
+Try it out at [verbindungen-game.web.app](verbindungen.obrhubr.org).
 
 This site is a clone of the popular puzzle published by the New York Times, [Connections](https://www.nytimes.com/games/connections). The objective of the game is to sort 16 words into four different categories.
 The goal was to recreate the game as simply as possible, in pure html, css and javascript (without the help of a framework). This allowed me to build it in about 24h.
