@@ -8,9 +8,9 @@ if (hosted) {
 	var userId = "";
 	if (localStorage.getItem("userId") == null) {
 		userId = crypto.randomUUID();
-		userId = localStorage.setItem("userId")
+		localStorage.setItem("userId", userId);
 	} else {
-		userId = localStorage.getItem("userId")
+		userId = localStorage.getItem("userId");
 	};
 	analytics.setUserId(userId);
 	
