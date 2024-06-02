@@ -82,8 +82,31 @@ function send() {
 	})
 	.then((docRef) => {
 		alert("Successfully added puzzle");
-		
-		window.location.replace("/");
+
+		// Log to logsnag
+		let data = {
+			"project": "verbindungen",
+			"channel": "puzzles",
+			"event": "add",
+			"description": "A user added a puzzle to the site.",
+			"icon": "➕",
+			"user_id": document.getElementById("author").value,
+			"notify": true,
+			"tags": {
+				"id": docRef.id
+			}
+		};
+		fetch("https://api.logsnag.com/v1/log", {
+			method: 'POST', // Specify the HTTP method
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${keys.logsnag}`
+			},
+			body: JSON.stringify(data), // Convert the JSON data to a string
+		})
+		.then(_ => {
+			window.location.replace("/");
+		});		
 	})
 	.catch((error) => {
 		alert("Error adding puzzle");
