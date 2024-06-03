@@ -1,3 +1,7 @@
+<p align="center">
+	<img alt="Logo" src=".github/icon.svg" data-canonical-src=".github/icon.svg" width="200"/>
+</p>
+
 # NYT Connections in German
 
 Try it out at [verbindungen.obrhubr.org](verbindungen.obrhubr.org).
