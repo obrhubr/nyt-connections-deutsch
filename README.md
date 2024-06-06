@@ -52,11 +52,20 @@ Once the correct username and password have been provided the user can fill out 
 ![Puzzle creation page](.github/creation.png) | ![Partially filled out puzzle](.github/partial.png) |
 
 
-## Analytics
+## Hosting a website that needs a database for free
 
-Firebase allows us to send custom events, that track the users progress with the puzzle.
-We identify the user with a specific UUID at the beginning of the session.
+The goal was to recreate the game as simply as possible, in pure html, css and javascript (without the help of a framework). This allowed me to build the site in about 24h.
 
-When the user makes a mistake or category an event with the puzzle id and user id is sent. At the end of the game a summary with the mistakes and puzzle id is sent to the server.
+At first Github Pages provided the necessary static hosting that powered the site, however the most important limitation was soon reached: adding new puzzles would require me to push a json file to the repository each time. This made it impossible for my friends to create their own puzzles without jumping through a lot of hurdles for non-technical users.
 
-This allows us to track which categories are harder or are solved first for example.
+Google’s Firebase allows users to host a static site and a NoSQL Database (Firestore)  entirely for free on their “Spark”-tier. It also provides an authentification service and analytics. 
+
+This is not an advertisement for their service and indeed it felt a bit like selling my soul to Google, as I was signing up and creating the project. But free hosting and a free database is very tempting, especially for a side-project like this. I would not want to incur any costs for hosting such a page at all, however minimal. 
+
+So I guess I should be happy Google allows me to host fun side-projects like this one to share with friends.
+
+### Technical details
+
+The technical details of my implementation are very simple. To create a puzzle you need to sign in with the admin account. A new “document” is then created, where the puzzle is stored in json format. When loading the site, the latest document is fetched from Firestore and you are automatically sent to that puzzle’s page.
+
+Sharing puzzles is also very simple by design: the webapp loads the puzzle id from a url parameter. This makes navigation a matter loading a specific url.
