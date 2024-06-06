@@ -1,10 +1,13 @@
 .popup{
 	position: absolute;
-	top: 0;
-	left: 50%;
+	top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
 
 	border-radius: 10px;
-	transform: translate(-50%, -50%) scale(0.1);
+	transform: scale(0.1);
 
 	visibility: hidden;
 	transition: all 0.4s ease-in-out;
@@ -12,8 +15,7 @@
 
 .popup-open{
 	visibility: visible;
-	top: 50%;
-	transform: translate(-50%, -50%) scale(1);
+	transform: scale(1);
 	opacity: 100% !important;
 }
 
@@ -26,6 +28,9 @@
 
 	text-align: center;
 	color: white;
+
+	padding: 30px;
+	width: 40%;
 }
 
 .results {
@@ -58,8 +63,8 @@
 	align-items: center;
 	justify-content: center;
 
-	padding: 30px;
-	width: 60%;
+	padding: 10px;
+	width: 90%;
 }
 
 .instructions-popup div {

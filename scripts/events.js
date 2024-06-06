@@ -147,40 +147,44 @@ function gameEnd(success) {
 	let history_dict = {}
 	tries.forEach((el, index) => history_dict[index] = el);
 
-	let stats = {
-		userId: userId,
-		timestamp: Date.now(),
-		id: puzzleNumber,
-		success: success,
-		mistakes: mistakes,
-		history: history_dict
+	try {
+		let stats = {
+			userId: userId,
+			timestamp: Date.now(),
+			id: puzzleNumber,
+			success: success,
+			mistakes: mistakes,
+			history: history_dict
+		};
+	
+		analytics.logEvent('end', stats);
+		db.collection("log").add(stats);
+	
+		// Log to logsnag
+		let data = {
+			"project": "verbindungen",
+			"channel": "puzzles",
+			"event": "finished",
+			"description": success ? "A user solved a puzzle." : "A user failed a puzzle.",
+			"icon": success ? "✅" : "❌",
+			"notify": true,
+			"tags": {
+				"id": puzzleNumber,
+				"success": success,
+				"mistakes": mistakes
+			}
+		};
+		fetch("https://api.logsnag.com/v1/log", {
+			method: 'POST', // Specify the HTTP method
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${keys.logsnag}`
+			},
+			body: JSON.stringify(data), // Convert the JSON data to a string
+		});
+	} catch (e) {
+		console.log("Error while logging stats: ", e)
 	};
-
-	analytics.logEvent('end', stats);
-	db.collection("log").add(stats);
-
-	// Log to logsnag
-	let data = {
-		"project": "verbindungen",
-		"channel": "puzzles",
-		"event": "finished",
-		"description": success ? "A user solved a puzzle." : "A user failed a puzzle.",
-		"icon": success ? "✅" : "❌",
-		"notify": true,
-		"tags": {
-			"id": puzzleNumber,
-			"success": success,
-			"mistakes": mistakes
-		}
-	};
-	fetch("https://api.logsnag.com/v1/log", {
-		method: 'POST', // Specify the HTTP method
-		headers: {
-			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${keys.logsnag}`
-		},
-		body: JSON.stringify(data), // Convert the JSON data to a string
-	});
 
 	let mistakesContainer = document.getElementById("mistake-container");
 	mistakesContainer.innerHTML = "";
