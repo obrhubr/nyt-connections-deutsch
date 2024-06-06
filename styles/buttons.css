@@ -38,3 +38,14 @@
 .active:hover {
 	background-color: #ededed;
 }
+
+.instructions {
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	background-color: white;
+
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 20px;
+}

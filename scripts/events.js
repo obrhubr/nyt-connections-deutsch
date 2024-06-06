@@ -102,6 +102,14 @@ async function showWarning(warning) {
 	w.classList.remove("popup-open");
 }
 
+function showInstructions() {
+	// Show popup
+	let w = document.getElementById("instructions");
+	w.classList.add("popup-open");
+	let r = document.getElementById("all");
+	r.classList.add("blurred");
+}
+
 function showResults() {
 	// Add score visualisation
 	let history = convertHistory();
@@ -124,6 +132,14 @@ function showResults() {
 	w.classList.add("popup-open");
 	let r = document.getElementById("all");
 	r.classList.add("blurred");
+}
+
+function closePopup(id) {
+	console.log(id)
+	let el = document.getElementById(id);
+	el.classList.remove("popup-open");
+	let r = document.getElementById("all");
+	r.classList.remove("blurred");
 }
 
 function gameEnd(success) {

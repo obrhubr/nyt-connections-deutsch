@@ -38,6 +38,10 @@
 					<span class="navigate" id="overview"><a href="/overview.html">Alle Puzzle</a></span>
 					<span onclick="forwards()" class="navigate" id="forwards">➡️</span>
 				</div>
+	
+				<div class="navigate-container">
+					<span onclick="showInstructions()" class="instructions" id="">How to Play?</span>
+				</div>
 			</div>
 		</div>
 
@@ -84,6 +88,7 @@
 	</div>
 
 	<div id="results" class="results popup">
+		<div class="close" onclick="closePopup('results');">X</div>
 		<div>
 			<h2>Dein Ergebnis</h2>
 		</div>
@@ -94,6 +99,45 @@
 	</div>
 
 	<div id="warning" class="warning popup">
+	</div>
+
+	<div id="instructions" class="popup instructions-popup">
+		<div class="close" onclick="closePopup('instructions');">X</div>
+
+		<div><b>Spielanleitung</b></div>
+		<div>Finde Gruppen von vier Wörtern, die etwas gemeinsam haben.</div>
+		
+		<div class="">
+			<ul>
+				<li>Wähle vier Gegenstände aus und tippe auf "Probieren", um zu überprüfen, ob deine Vermutung richtig ist.</li>
+				<li>Finde die Gruppen, ohne 4 Fehler zu machen!</li>
+			</ul>
+		</div>
+
+		<div>
+			<b>Beispielkategorien</b>
+			<ul>
+				<li><b>FISCHE</b>: Barsch, Flunder, Lachs, Forelle</li>
+				<li><b>FIRE ___</b>: Ameise, Wehr, Schale, Opal</li>
+			</ul>
+		</div>
+
+		<div>
+			Kategorien werden immer spezifischer als „5-BUCHSTABEN-WÖRTER“, „NAMEN“ oder „VERBEN“ sein.
+			<br/>
+			Jedes Rätsel hat genau eine Lösung. Achte auf Wörter, die zu mehreren Kategorien zu gehören scheinen!
+		</div>
+
+		<div>
+			Jede Gruppe wird einer Farbe zugewiesen, die beim Lösen angezeigt wird:
+			
+			<div class="difficulty">
+				<div class="show-difficulty" style="background-color: rgb(249, 223, 109);">Einfach</div>
+				<div class="show-difficulty" style="background-color: rgb(160, 195, 90);">Medium</div>
+				<div class="show-difficulty" style="background-color: rgb(176, 196, 239);">Schwer</div>
+				<div class="show-difficulty" style="background-color: rgb(186, 129, 197);">Knifflig</div>
+			</div>
+		</div>
 	</div>
 	
 	<script src="scripts/db.js"></script>
